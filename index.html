@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#000000"> <!-- Set theme color -->
     <title>Vicksburg News Search</title>
     <style>
-        @keyframes shining {
-            0% {background-position: 200%;}
-            50% {background-position: -200%;}
-            100% {background-position: 200%;}
+        @keyframes shine {
+            0% {
+                background-position: -100%;
+            }
+            50% {
+                background-position: 200%;
+            }
+            100% {
+                background-position: -100%;
+            }
         }
         body {
             background-color: black;
             color: green;
             font-family: Arial, sans-serif;
-            background-image: url('https://slyshot247.github.io/Telegram-Web_App_Example/?searchQuery=testing');
+            background-image: url('alligator-face-image-url');
             background-repeat: no-repeat;
             background-size: cover;
             display: flex;
@@ -32,21 +37,42 @@
             border-radius: 10px;
             text-align: center;
         }
-
-     h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
-    background-image: linear-gradient(120deg, #f8d800, #f9a826);
-    background-size: 200%;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: shining 2s linear infinite;
-    /* Fallback color */
-    color: green;
-}
-
-        /* Other styles remain unchanged */
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            position: relative;
+            background: linear-gradient(120deg, #00e600, #00ff00);
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 1.5s linear infinite;
+        }
+        label, input, button {
+            display: block;
+            margin: 10px 0;
+        }
+        button {
+            background-color: green;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #006400;
+        }
+        footer p {
+            margin-top: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -71,8 +97,11 @@
             <p>Created by Brian Clark</p>
         </footer>
     </div>
+    
     <script>
-        // Replace this comment with your JavaScript code
+        // Add JavaScript here to handle form submission, 
+        // make API requests or web scraping, 
+        // and display the results in the 'resultsSection'.
     </script>
 </body>
 </html>
