@@ -86,11 +86,33 @@
         </header>
         <main>
             <section>
-                <form id="newsSearchForm">
-                    <label for="searchQuery">Search for News:</label>
-                    <input type="text" id="searchQuery" name="searchQuery" required>
-                    <button type="submit">Search</button>
-                </form>
+              <!-- ... (rest of your code) ... -->
+<form id="newsSearchForm">
+    <label for="searchQuery">Search for News:</label>
+    <input type="text" id="searchQuery" name="searchQuery" required>
+
+    <p>Select your news preferences:</p>
+    <div>
+        <input type="checkbox" id="localEvents" name="newsType" value="Local Events">
+        <label for="localEvents">Local Events</label>
+    </div>
+    <div>
+        <input type="checkbox" id="crimeNews" name="newsType" value="Crime News">
+        <label for="crimeNews">Crime News</label>
+    </div>
+    <div>
+        <input type="checkbox" id="businessUpdates" name="newsType" value="Business Updates">
+        <label for="businessUpdates">Business Updates</label>
+    </div>
+    <div>
+        <input type="checkbox" id="weatherAlerts" name="newsType" value="Weather Alerts">
+        <label for="weatherAlerts">Weather Alerts</label>
+    </div>
+
+    <button type="submit">Search</button>
+</form>
+<!-- ... (rest of your code) ... -->
+
             </section>
             <section id="resultsSection">
                 <!-- Results will be displayed here -->
