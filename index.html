@@ -124,9 +124,27 @@
     </div>
     
     <script>
-        // Add JavaScript here to handle form submission, 
-        // make API requests or web scraping, 
-        // and display the results in the 'resultsSection'.
+         // Add the JavaScript code here.
+
+    document.getElementById('newsSearchForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Capture the search query and news preferences
+        const searchQuery = document.getElementById('searchQuery').value;
+
+        // Get all selected news types
+        const selectedNewsTypes = [];
+        document.querySelectorAll('input[name="newsType"]:checked').forEach(checkbox => {
+            selectedNewsTypes.push(checkbox.value);
+        });
+
+        // Use searchQuery and selectedNewsTypes to make API requests or web scraping
+        // Then, display the results in the 'resultsSection'
+
+        // Example (just a placeholder):
+        document.getElementById('resultsSection').innerText = `Search results for: ${searchQuery} in categories: ${selectedNewsTypes.join(', ')}`;
+    });
+
     </script>
 </body>
 </html>
