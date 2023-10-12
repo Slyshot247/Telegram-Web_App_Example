@@ -1,5 +1,24 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // ... [Your previous map initialization code]
+    const map = L.map('map').setView([32.3527, -90.8779], 13); // Vicksburg coordinates
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    const heatmapLayer = new L.heatLayer([], {radius: 25}).addTo(map);
+
+    fetch('https://cors-anywhere.herokuapp.com/https://vicksburgnews.com/feed/')
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+            const items = data.querySelectorAll("item");
+            const heatmapData = Array.from(items).map(item => {
+                const lat = 32.3527 + (Math.random() - 0.5) * 0.1;
+                const lng = -90.8779 + (Math.random() - 0.5) * 0.1;
+                return [lat, lng, 0.5]; 
+            });
+            heatmapLayer.setLatLngs(heatmapData);
+        });
 
     // Adding the legend
     const legend = L.control({ position: 'bottomright' });
@@ -7,11 +26,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const div = L.DomUtil.create('div', 'legend');
         const grades = [0, 0.2, 0.4, 0.6, 0.8, 1];
         const colors = ['#00f', '#0af', '#ff0', '#fa0', '#f00'];
-        
-        // Title for the legend
+
         div.innerHTML += '<strong>Heatmap Intensity</strong><br>';
-        
-        // Generating a color square for each intensity
         for (let i = 0; i < grades.length; i++) {
             div.innerHTML += 
                 '<i style="background:' + colors[i] + '"></i> ' +
