@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vicksburg News Heatmap</title>
-    <div id="legend" style="background-color: white; padding: 10px; border-radius: 3px;"></div>
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
-    <!-- Leaflet Heatmap JS -->
-    <script src="https://cdn.jsdelivr.net/gh/Leaflet/Leaflet.heat/dist/leaflet-heat.js"></script>
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-</head>
-<body>
-    <div id="map" style="width: 100%; height: 500px;"></div>
-    <div id="legend" style="background-color: white; padding: 10px; border-radius: 3px;"></div>
-    <script src="Data_Fetch.js"></script>
-</body>
-</html>
+document.addEventListener("DOMContentLoaded", function() {
+    const map = L.map('map').setView([32.3527, -90.8779], 13); // Vicksburg coordinates
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    const heatmapLayer = new L.heatLayer([], {radius: 25}).addTo(map);
+
+    fetch('https://cors-anywhere.herokuapp.com/https://vicksburgnews.com/feed/')
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str
