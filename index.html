@@ -77,6 +77,13 @@
             margin-bottom: 20px;
         }
     </style>
+    <!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<!-- Leaflet Heatmap JS -->
+<script src="https://cdn.jsdelivr.net/gh/Leaflet/Leaflet.heat/dist/leaflet-heat.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -86,31 +93,8 @@
         </header>
         <main>
             <section>
-              <!-- ... (rest of your code) ... -->
-<form id="newsSearchForm">
-    <label for="searchQuery">Search for News:</label>
-    <input type="text" id="searchQuery" name="searchQuery" required>
+   <div id="map" style="width: 100%; height: 400px;"></div>
 
-    <p>Select your news preferences:</p>
-    <div>
-        <input type="checkbox" id="localEvents" name="newsType" value="Local Events">
-        <label for="localEvents">Local Events</label>
-    </div>
-    <div>
-        <input type="checkbox" id="crimeNews" name="newsType" value="Crime News">
-        <label for="crimeNews">Crime News</label>
-    </div>
-    <div>
-        <input type="checkbox" id="businessUpdates" name="newsType" value="Business Updates">
-        <label for="businessUpdates">Business Updates</label>
-    </div>
-    <div>
-        <input type="checkbox" id="weatherAlerts" name="newsType" value="Weather Alerts">
-        <label for="weatherAlerts">Weather Alerts</label>
-    </div>
-
-    <button type="submit">Search</button>
-</form>
 <!-- ... (rest of your code) ... -->
 
             </section>
@@ -126,24 +110,31 @@
     <script>
          // Add the JavaScript code here.
 
-    document.getElementById('newsSearchForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+ document.addEventListener("DOMContentLoaded", function() {
+    const map = L.map('map').setView([32.3527, -90.8779], 13); // Vicksburg coordinates
 
-        // Capture the search query and news preferences
-        const searchQuery = document.getElementById('searchQuery').value;
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
 
-        // Get all selected news types
-        const selectedNewsTypes = [];
-        document.querySelectorAll('input[name="newsType"]:checked').forEach(checkbox => {
-            selectedNewsTypes.push(checkbox.value);
-        });
+    const heatmapLayer = new L.heatLayer([], {radius: 25}).addTo(map);
 
-        // Use searchQuery and selectedNewsTypes to make API requests or web scraping
-        // Then, display the results in the 'resultsSection'
+    function updateHeatmap(newsData) {
+        // Assuming newsData is an array of objects with `lat`, `lng` and `intensity`
+        // e.g., [{lat: 32.3527, lng: -90.8779, intensity: 0.5}, ...]
+        const heatData = newsData.map(d => [d.lat, d.lng, d.intensity]);
+        heatmapLayer.setLatLngs(heatData);
+    }
 
-        // Example (just a placeholder):
-        document.getElementById('resultsSection').innerText = `Search results for: ${searchQuery} in categories: ${selectedNewsTypes.join(', ')}`;
-    });
+    // You will need to replace this with an actual API call or data fetch method.
+    // For now, using a mock dataset.
+    const mockNewsData = [
+        {lat: 32.3527, lng: -90.8779, intensity: 0.5},
+        // Add more data points here
+    ];
+
+    updateHeatmap(mockNewsData);
+});
 
     </script>
 </body>
