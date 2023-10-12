@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const heatmapLayer = new L.heatLayer([], {radius: 25}).addTo(map);
 
-    fetch('https://vicksburgnews.com/feed/')
+    fetch('https://cors-anywhere.herokuapp.com/https://vicksburgnews.com/feed/')
+
         .then(response => response.text())
         .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
         .then(data => {
