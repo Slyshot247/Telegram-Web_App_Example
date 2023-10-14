@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         maxZoom: 19
     }).addTo(map);
 
-    const heatmapLayer = new L.heatLayer([], {radius: 25}).addTo(map);
+    const heatmapLayer = new L.heatLayer([], { radius: 25 }).addTo(map);
 
     fetch('https://cors-anywhere.herokuapp.com/https://vicksburgnews.com/feed/')
         .then(response => response.text())
@@ -13,9 +13,10 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             const items = data.querySelectorAll("item");
             const heatmapData = Array.from(items).map(item => {
-                const lat = 32.3527 + (Math.random() - 0.5) * 0.1;
-                const lng = -90.8779 + (Math.random() - 0.5) * 0.1;
-                return [lat, lng, 0.5]; 
+                // Replace with actual lat and lng from your news feed
+                const lat = parseFloat(item.querySelector("latitude").textContent);
+                const lng = parseFloat(item.querySelector("longitude").textContent);
+                return [lat, lng, 0.5];
             });
             heatmapLayer.setLatLngs(heatmapData);
         });
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         div.innerHTML += '<strong>Heatmap Intensity</strong><br>';
         for (let i = 0; i < grades.length; i++) {
-            div.innerHTML += 
+            div.innerHTML +=
                 '<i style="background:' + colors[i] + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
