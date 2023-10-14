@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const items = data.querySelectorAll("item");
             const heatmapData = Array.from(items).map(item => {
                 // Replace with actual lat and lng from your news feed
-                const lat = parseFloat(item.querySelector("latitude").textContent);
-                const lng = parseFloat(item.querySelector("longitude").textContent);
+                const lat = parseFloat(item.querySelector("32.3526").textContent);
+                const lng = parseFloat(item.querySelector("90.8779").textContent);
                 return [lat, lng, 0.5];
             });
             heatmapLayer.setLatLngs(heatmapData);
