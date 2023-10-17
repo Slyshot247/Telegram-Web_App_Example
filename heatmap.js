@@ -1,13 +1,18 @@
-document.getElementById("heatmap").addEventListener("mousemove", function(e) {
-    // Get the position of the mouse pointer relative to the heatmap
-    var x = e.offsetX / this.clientWidth;
-    var y = e.offsetY / this.clientHeight;
-    
-    // Calculate the RGB color based on the position
-    var r = 255 * y;
-    var g = 255 - 255 * y;
-    var b = 0;
-    
-    // Set the background color of the heatmap element
-    this.style.backgroundColor = "rgb(" + r + ", " + g + ", " + b + ")";
-});
+// Create a Leaflet map
+var map = L.map('map').setView([51.505, -0.09], 13);
+
+// Add a tile layer to the map (you can choose your preferred tile provider)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
+
+// Sample heatmap data
+var heatMapData = [
+    [51.5, -0.09, 1], // Latitude, Longitude, Intensity
+    [51.51, -0.1, 0.5],
+    [51.52, -0.12, 0.8],
+    // Add more data points here
+];
+
+// Create a Heatmap layer and add it to the map
+var heat = L.heatLayer(heatMapData, { radius: 25 }).addTo(map);
